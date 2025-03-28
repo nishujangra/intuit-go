@@ -10,7 +10,7 @@ import (
 	"github.com/nishujangra/intuit-go/pkg/client"
 )
 
-func main() {
+func CreateBankAccount() {
 	authClient := auth.NewAuthClient(config.GetClientID(), config.GetClientSecret(), config.GetPaymentsBaseURL())
 
 	accessToken, err := authClient.GetToken("<Your Auth Code>")

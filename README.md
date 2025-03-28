@@ -64,9 +64,11 @@ Go to the BankAccount for this, [Click Here](docs/BankAccount.md)
 Check the [examples](examples/) for how to use this SDK.
 
 
-## For Auth Setup
-Checkout [Auth Docs](docs/Auth.md)
+## Related Links
 
+- [How to setup authentication](docs/Auth.md)
+- [Bank Account](docs/BankAccount.md)
+- [Create Card and Process Transaction](docs/Card.md)
 ---
 
 ## 🛠 Contributing

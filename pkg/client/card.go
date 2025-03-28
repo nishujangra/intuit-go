@@ -7,10 +7,10 @@ import (
 	"github.com/nishujangra/intuit-go/models"
 )
 
-func (c *Client) CreateBankAccount(customerID string, accountData models.BankAccount) (map[string]interface{}, error) {
-	endpoint := fmt.Sprintf("/quickbooks/v4/customers/%s/bank-accounts", customerID)
+func (c *Client) CreateCard(customerID string, cardData models.Card) (map[string]interface{}, error) {
+	endpoint := fmt.Sprintf("/quickbooks/v4/customers/%s/cards", customerID)
 
-	resp, err := c.requestHelper("POST", endpoint, accountData)
+	resp, err := c.requestHelper("POST", endpoint, cardData)
 	if err != nil {
 		return nil, err
 	}
