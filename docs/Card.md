@@ -11,15 +11,7 @@ This module handles **card operations** in the Intuit Payment SDK, allowing you 
 POST /quickbooks/v4/customers/{id}/cards
 ```
 
-### **Request Headers:**
-| Header      | Value               | Required |
-|------------|--------------------|----------|
-| Authorization | `Bearer {access_token}` | ✅ |
-| Content-Type | `application/json` | ✅ |
-| request-Id  | `Unique UUID per request` | ✅ |
-
-### **Request Body:**
-### Card Object Request Body
+### Card Model
 
 | Attribute          | Type     | Required | Description |
 |--------------------|---------|----------|-------------|
@@ -34,26 +26,23 @@ POST /quickbooks/v4/customers/{id}/cards
 | `isBusiness`     | Boolean | ❌ No    | Indicates if the card is a business card. |
 
 
-
-
-### **Example Request:**
-```json
-{
-  "expMonth": "12", 
-  "address": {
-    "postalCode": "44112", 
-    "city": "Richmond", 
-    "streetAddress": "1245 Hana Rd", 
-    "region": "VA", 
-    "country": "US"
-  }, 
-  "number": "4408041234567893", 
-  "name": "Captain Jack Sparrow", 
-  "expYear": "2026"
+### 🛠 Example Usage
+```go
+cardData := models.Card{
+	Number:   "4111111111111111",
+	CardType: "VISA",
+	ExpMonth: "12",
+	ExpYear:  "2025",
+	CVC:      "123",
+	Name:     "Tony Stark",
 }
+
+customerID := "12345" // Get from API
+
+createdCard, err := apiClient.CreateCard(customerID, cardData)
 ```
 
-### **Example Response:**
+### 🛠 Example Response for Success
 ```json
 {
   "updated": "2025-03-28T22:24:33Z", 

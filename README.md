@@ -54,14 +54,24 @@ Fill the `config.json` file with
 }
 ```
 
-### 3. Initialize SDK to create Bank Account in your Code
+### 3. Make API client
 
-Go to the BankAccount for this, [Click Here](docs/BankAccount.md)
+```go
+authClient := auth.NewAuthClient(config.GetClientID(), config.GetClientSecret(), config.GetPaymentsBaseURL())
+
+accessToken, err := authClient.GetToken("<Auth Token>")
+if err != nil {
+	fmt.Println(err)
+}
+
+apiClient := client.NewClient(accessToken)
+```
 
 ---
 
 ## Usage
 Check the [examples](examples/) for how to use this SDK.
+
 
 
 ## Related Links

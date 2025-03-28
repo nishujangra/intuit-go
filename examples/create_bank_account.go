@@ -31,10 +31,10 @@ func CreateBankAccount() {
 
 	customerID := "12345" // Get from API
 
-	createdAccount, err := apiClient.CreateBankAccount(customerID, accountData)
+	bankAccount, err := apiClient.CreateBankAccount(customerID, accountData)
 	if err != nil {
 		log.Fatalf("Failed to create bank account: %v", err)
 	}
 
-	fmt.Printf("Created Bank Account: %+v\n", createdAccount)
+	fmt.Printf("Created Bank Account: %+v\n", bankAccount)
 }

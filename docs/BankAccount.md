@@ -4,19 +4,18 @@ This document provides details on how to create a **Bank Account** using the Int
 
 ## 🌐 API Endpoint
 
+### **1. Create a Bank Account**
 **POST** `/quickbooks/v4/customers/{customer-id}/bank-accounts`
 
-- **Production URL:** `https://api.intuit.com`
-- **Sandbox URL:** `https://sandbox.api.intuit.com`
+This Go-SDK has `CreateBankAccount(customerID string, accountData models.BankAccount)` function in the client package to hit that request.
 
-## 🔑 Headers
-| Header       | Value Example             | Description |
-|-------------|--------------------------|-------------|
-| Authorization | `Bearer {ACCESS_TOKEN}`  | Your OAuth2 Access Token |
-| Content-Type | `application/json`       | API request format |
-| request-Id  | `UUID`                    | Unique request identifier |
+```go
+customerID := '< of the customer>'
 
-## 📥 Request Body
+accoundData := '<account details or request body>`
+```
+
+### 📥 BankAccount Model
 | Parameter       | Required | Type   | Example Value        | Description |
 |----------------|----------|--------|----------------------|-------------|
 | `name`         | ✅       | String | `"Tony Stark"`         | Name of account holder |
@@ -30,91 +29,60 @@ This document provides details on how to create a **Bank Account** using the Int
 | `inputType`    | ❌       | Enum   | `"KEYED"`            | Method of input |
 
 
-## 🛠 Example Request
-```json
-{
-  "name": "John Doe",
-  "accountNumber": "123456789012",
-  "accountType": "PERSONAL_CHECKING",
-  "routingNumber": "021000021",
-  "phone": "9876543210",
-  "country": "US",
-  "default": true,
-  "bankCode": "021000021",
-  "inputType": "KEYED"
+### 🛠 Example Usage
+```go
+accountData := models.BankAccount{
+	Name:          "Tony Stark",
+	AccountNumber: "123456789343274",
+	AccountType:   "PERSONAL_SAVINGS",
+	RoutingNumber: "021000021",
+	Phone:         "1234567890",
+	BankCode:      "021000021",
 }
+
+customerID := "12345" // Get from API
+
+bankAccount, err := apiClient.CreateBankAccount(customerID, accountData)
 ```
 
-## 🛠 Example Response for Success
+### 🛠 Example Response for Success
 
 ```json
 {
   "id": "123456",
-  "name": "John Doe",
-  "accountNumber": "****7890",
-  "accountType": "PERSONAL_CHECKING",
+  "name": "Tony Stark",
+  "accountNumber": "**********3274",
+  "accountType": "PERSONAL_SAVINGS",
   "routingNumber": "****0021",
-  "phone": "9876543210",
+  "phone": "1234567890",
   "country": "US",
   "default": true
 }
 ```
 
-## Error Handling
+---
 
-| Error Code | Message | Solution | 
-| --- | --- | --- |
-| `PMT-400` | `"routingNumber is invalid."` | Ensure routing number is exactly of 9 digits
-| `401` | `"Unauthorized"` | Check the access token |
-| `400` | `"Invalid Request"` | Validate the parameters
+### **2. Get Details of a Bank Account**
+**GET** `/quickbooks/v4/customers/{customer-id}/bank-accounts/{bankaccount-id}`
 
+After making a api request on this endpoint example response will be like 
 
-## Example Usage in Go
-
-As show in the file [`create_bank_account.go`](/examples/create_bank_account.go)
-
-```go
-package main
-
-import (
-	"fmt"
-	"log"
-
-	"github.com/nishujangra/intuit-go/config"
-	"github.com/nishujangra/intuit-go/models"
-	"github.com/nishujangra/intuit-go/pkg/auth"
-	"github.com/nishujangra/intuit-go/pkg/client"
-)
-
-func main() {
-	authClient := auth.NewAuthClient(config.GetClientID(), config.GetClientSecret(), config.GetPaymentsBaseURL())
-
-	accessToken, err := authClient.GetToken("<Your Auth Code>")
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	apiClient := client.NewClient(accessToken)
-
-	accountData := models.BankAccount{
-		Name:          "Tony Stark",
-		AccountNumber: "123456789343274",
-		AccountType:   "PERSONAL_SAVINGS",
-		RoutingNumber: "021000021",
-		Phone:         "1234567890",
-		BankCode:      "021000021",
-	}
-
-	customerID := "12345" // Get from API
-
-	createdAccount, err := apiClient.CreateBankAccount(customerID, accountData)
-	if err != nil {
-		log.Fatalf("Failed to create bank account: %v", err)
-	}
-
-	fmt.Printf("Created Bank Account: %+v\n", createdAccount)
+### 🛠 Example Response for Success
+```json
+{
+  "updated": "2025-03-28T23:25:19Z", 
+  "name": "Richard Jones", 
+  "accountNumber": "XXXXXXXXXXX3274", 
+  "default": false, 
+  "created": "2025-03-28T16:05:39Z", 
+  "inputType": "KEYED", 
+  "phone": "6047296480", 
+  "accountType": "PERSONAL_SAVINGS", 
+  "routingNumber": "XXXXX0021", 
+  "id": "200161921532106731364534"
 }
 ```
+
 
 
 ## References

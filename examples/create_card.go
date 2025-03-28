@@ -12,7 +12,7 @@ import (
 func CreateCard() {
 	authClient := auth.NewAuthClient(config.GetClientID(), config.GetClientSecret(), config.GetPaymentsBaseURL())
 
-	accessToken, err := authClient.GetToken("AB11743188166zAoePRJcZpSkNcAgQvByhtkz5uz57LTC2F81c")
+	accessToken, err := authClient.GetToken("<Auth Token>")
 	if err != nil {
 		fmt.Println(err)
 	}
