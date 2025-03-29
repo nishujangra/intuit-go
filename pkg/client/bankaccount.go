@@ -41,7 +41,7 @@ func (c *Client) GetBankAccount(customerID string, accountID string) (map[string
 	return data, nil
 }
 
-func (c *Client) GetBankAccounts(customerID string) ([]models.BankAccount, error) {
+func (c *Client) GetBankAccounts(customerID string) ([]map[string]interface{}, error) {
 	endpoint := fmt.Sprintf("/quickbooks/v4/customers/%s/bank-accounts", customerID)
 
 	resp, err := c.requestHelper("GET", endpoint, nil)
@@ -49,7 +49,7 @@ func (c *Client) GetBankAccounts(customerID string) ([]models.BankAccount, error
 		return nil, err
 	}
 
-	var data []models.BankAccount
+	var data []map[string]interface{}
 	err = json.NewDecoder(resp.Body).Decode(&data)
 	if err != nil {
 		return nil, err

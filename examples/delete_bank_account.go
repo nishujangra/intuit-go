@@ -11,7 +11,7 @@ import (
 func DeleteBankAccount() {
 	authClient := auth.NewAuthClient(config.GetClientID(), config.GetClientSecret(), config.GetPaymentsBaseURL())
 
-	accessToken, err := authClient.GetToken("AB11743234532LUMWhKS6A2tJ0uCI5Y07TqKp7SmjeOA07tCZv")
+	accessToken, err := authClient.GetToken("<Auth Code>")
 	if err != nil {
 		fmt.Println(err)
 	}
