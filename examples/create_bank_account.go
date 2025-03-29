@@ -21,7 +21,7 @@ func CreateBankAccount() {
 	apiClient := client.NewClient(accessToken)
 
 	accountData := models.BankAccount{
-		Name:          "Tony Stark",
+		Name:          "Thor",
 		AccountNumber: "123456789343274",
 		AccountType:   "PERSONAL_SAVINGS",
 		RoutingNumber: "021000021",

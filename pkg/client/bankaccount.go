@@ -40,3 +40,34 @@ func (c *Client) GetBankAccount(customerID string, accountID string) (map[string
 
 	return data, nil
 }
+
+func (c *Client) GetBankAccounts(customerID string) ([]models.BankAccount, error) {
+	endpoint := fmt.Sprintf("/quickbooks/v4/customers/%s/bank-accounts", customerID)
+
+	resp, err := c.requestHelper("GET", endpoint, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var data []models.BankAccount
+	err = json.NewDecoder(resp.Body).Decode(&data)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}
+
+func (c *Client) DeleteBankAccount(customerID string, accountID string) (map[string]interface{}, error) {
+	endpoint := fmt.Sprintf("/quickbooks/v4/customers/%s/bank-accounts/%s", customerID, accountID)
+
+	resp, err := c.requestHelper("DELETE", endpoint, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return map[string]interface{}{
+		"message": "Bank account deleted successfully",
+		"status":  resp.StatusCode,
+	}, nil
+}

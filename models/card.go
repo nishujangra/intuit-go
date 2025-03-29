@@ -19,6 +19,5 @@ type Card struct {
 	EntityId           string   `json:"entityId,omitempty"`
 
 	// Response only fields
-	IsLevel3Eligible       bool `json:"isLevel3Eligible,omitempty"`
-	ZeroDollarVerification bool `json:"zeroDollarVerification,omitempty"`
+	IsLevel3Eligible bool `json:"isLevel3Eligible,omitempty"`
 }
