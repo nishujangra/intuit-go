@@ -86,3 +86,19 @@ func (c *Client) CaptureCharge(chargeID string, capture models.Capture) (map[str
 	}
 	return data, nil
 }
+
+func (c *Client) VoidCharge(chargeRequestID string) (map[string]interface{}, error) {
+	endpoint := fmt.Sprintf("/quickbooks/v4/payments/txn-requests/%s/void", chargeRequestID)
+
+	resp, err := c.requestHelper("POST", endpoint, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var data map[string]interface{}
+	err = json.NewDecoder(resp.Body).Decode(&resp)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}

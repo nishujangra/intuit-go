@@ -304,6 +304,40 @@ resp, err := apiClient.CaptureCharge(chargeID, capture)
 
 ---
 
+### **6. Void a Charge**
+
+**POST**
+
+`Note:` You would require `request-id` of the charge you want to avoid. I would recommed you to store the `request-id` to your database to reuse them.
+
+### 🛠 Example Usage
+
+```go
+apiClient := client.NewClient(accessToken)
+
+chargeRequestID := "chrg_3J2Y1Z2eZvKYlo2C7g4v5a0d"
+
+voidCharge, err := apiClient.VoidCharge(chargeRequestID)
+```
+
+### 🛠 Example Response for Success
+
+```json
+{
+    "status": "ISSUED",
+    "created": "2025-5-30T10:59:23Z",
+    "amount": "1.00",
+    "context": {
+        "mobile": false,
+        "recurring": false
+    },
+    "type": "VOID",
+    "id": "E7UT68A501QI"
+}
+```
+
+---
+
 ## References
 
 -   [Charges API Docs](https://developer.intuit.com/app/developer/qbpayments/docs/api/resources/all-entities/charges)
