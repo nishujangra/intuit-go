@@ -72,13 +72,13 @@ apiClient := client.NewClient(accessToken)
 ## Usage
 Check the [examples](examples/) for how to use this SDK.
 
-
-
 ## Related Links
 
 - [How to setup authentication](docs/Auth.md)
 - [Bank Account](docs/BankAccount.md)
-- [Create Card and Process Transaction](docs/Card.md)
+- [Crate Card](docs/Card.md)
+- [Charges, Refund](docs/Charge.md)
+
 ---
 
 ## 🛠 Contributing
