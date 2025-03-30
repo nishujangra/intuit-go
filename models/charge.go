@@ -7,13 +7,8 @@ type Charge struct {
 	Context  Context `json:"context"`
 
 	// Optional
-	Capture     bool   `json:"capture,omitempty"`
+	Capture     string `json:"capture,omitempty" type:"boolean"`
 	Description string `json:"description,omitempty"`
 	CardOnFile  bool   `json:"cardOnFile,omitempty"`
 	Card        Card   `json:"card,omitempty"`
-}
-
-type Context struct {
-	Mobile      string `json:"mobile,omitempty" type:"boolean"`
-	IsEcommerce string `json:"isEcommerce,omitempty" type:"boolean"`
 }

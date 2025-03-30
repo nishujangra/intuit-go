@@ -81,7 +81,7 @@ chargeCreated, err := apiClient.CreateCharge(charge)
         "expYear": "2025",
         "name": "Tony Stark",
         "number": "xxxxxxxxxxxx1111"
-},
+    },
     "cardSecurityCodeMatch": "NotAvailable",
     "context": {
         "clientTransID": "a9xts389",
@@ -104,3 +104,206 @@ chargeCreated, err := apiClient.CreateCharge(charge)
 ```
 
 ---
+
+### **2. Get a Charge**
+
+**GET** `/quickbooks/v4/payments/charges/{charge-id}`
+
+### 🛠 Example Usage
+
+```go
+apiClient := client.NewClient(accessToken)
+
+chargeId := "EZXGXZQHXXCF" // Replace with your charge ID
+
+charge, err := apiClient.GetCharge(chargeId)
+```
+
+### 🛠 Example Response for Success
+
+```json
+{
+    "amount": "100.00",
+    "appType": "7716935554825128052",
+    "authCode": "696699",
+    "avsStreet": "Pass",
+    "avsZip": "Pass",
+    "capture": true,
+    "card": {
+        "address": { "country": "USA" },
+        "cardType": "Visa",
+        "expMonth": "12",
+        "expYear": "2025",
+        "name": "Tony Stark",
+        "number": "xxxxxxxxxxxx1111"
+    },
+    "cardSecurityCodeMatch": "NotAvailable",
+    "context": { "isEcommerce": false, "mobile": false, "recurring": false },
+    "created": "2025-03-29T20:09:26Z",
+    "currency": "USD",
+    "description": "Test charge",
+    "id": "EZXGXZQXGXCF",
+    "status": "CAPTURED"
+}
+```
+
+---
+
+### **3. Refund a charge**
+
+**POST** `v4/payments/charges/{charge-id}/refunds`
+
+### 🛠 Example Usage
+
+```go
+apiClient := client.NewClient(accessToken)
+
+chargeId := "EZXGXZQHXXCF" // Replace with your charge ID
+
+refund := models.Refund{
+	Amount:      "10.00",
+	Description: "Refund for order #12345",
+	Context: models.Context{
+		Mobile:      "false",
+		IsEcommerce: "true",
+		Tax:         "0.00",
+	},
+}
+
+refund, err := apiClient.RefundCharge(chargeID, refund)
+```
+
+### 🛠 Example Response for Success
+
+```json
+{
+    "amount": "10.00",
+    "context": {
+        "clientTransID": "a9xts3wz",
+        "isEcommerce": true,
+        "mobile": false,
+        "paymentGroupingCode": "5",
+        "reconBatchID": "420250330 1Q01449999996176237953AUTO04",
+        "recurring": false,
+        "tax": "0.00",
+        "txnAuthorizationStamp": "1743324244"
+    },
+    "created": "2025-03-30T08:44:04Z",
+    "description": "Refund for order #12345",
+    "id": "EFL8WUV0W36R",
+    "status": "ISSUED",
+    "type": "REFUND"
+}
+```
+
+---
+
+### **4. Get a refund by ID**
+
+**GET** `/quickbooks/v4/payments/charges/{charge-id}/refunds/{refund-id}`
+
+### 🛠 Example Usage
+
+```go
+aapiClient := client.NewClient(accessToken)
+
+chargeID := "EZXGXZQXGXCF" // Replace with your charge ID
+refundID := "EUATXWTYC2ZL" // Replace with your refund ID
+
+refund, err := apiClient.GetRefund(chargeID, refundID)
+```
+
+### 🛠 Example Response for Success
+
+```json
+{
+    "amount": "5.00",
+    "context": { "isEcommerce": false, "mobile": false, "recurring": false },
+    "created": "2025-03-30T07:58:42Z",
+    "description": "first refund",
+    "id": "EUATXWTYC2ZL",
+    "status": "ISSUED",
+    "type": "REFUND"
+}
+```
+
+---
+
+### **5. Capture of Charge**
+
+**POST** `/quickbooks/v4/payments/charges/{charge-id}/capture`
+
+`Note` : To capture a charge, the status of the charge should not be `CAPTURED`. Set `capture:false` while creating charge
+
+### 🛠 Example Usage
+
+```go
+apiClient := client.NewClient(accessToken)
+
+chargeID := "EWKF2SVGW8S3" // Replace with your charge ID
+
+capture := models.Capture{
+	Amount:      "10.00",
+	Description: "Refund for order #12345",
+	Context: &models.Context{
+		Mobile:      "false",
+		IsEcommerce: "true",
+		Tax:         "0.00",
+	},
+}
+
+resp, err := apiClient.CaptureCharge(chargeID, capture)
+```
+
+### 🛠 Example Response for Success
+
+```json
+{
+    "amount": "100.00",
+    "appType": "7716935554825128052",
+    "authCode": "503100",
+    "avsStreet": "Pass",
+    "avsZip": "Pass",
+    "capture": false,
+    "captureDetail": {
+        "amount": "10.00",
+        "context": {
+            "isEcommerce": false,
+            "mobile": false,
+            "recurring": false,
+            "tax": "0.00"
+        },
+        "created": "2025-03-30T08:55:52Z",
+        "description": "Refund for order #12345"
+    },
+    "card": {
+        "address": {},
+        "cardType": "Visa",
+        "expMonth": "12",
+        "expYear": "2025",
+        "name": "Tony Stark",
+        "number": "xxxxxxxxxxxx1111"
+    },
+    "cardSecurityCodeMatch": "NotAvailable",
+    "context": {
+        "isEcommerce": false,
+        "merchantAccountNumber": "9999996176237953",
+        "mobile": false,
+        "paymentGroupingCode": "5",
+        "reconBatchID": "420250330 1Q01559999996176237953AUTO04",
+        "recurring": false,
+        "txnAuthorizationStamp": "1743324952"
+    },
+    "created": "2025-03-30T08:55:26Z",
+    "currency": "USD",
+    "description": "Test charge",
+    "id": "EWKF2SVGW8S3",
+    "status": "CAPTURED"
+}
+```
+
+---
+
+## References
+
+-   [Charges API Docs](https://developer.intuit.com/app/developer/qbpayments/docs/api/resources/all-entities/charges)
