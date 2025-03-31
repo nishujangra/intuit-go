@@ -2,10 +2,10 @@
 
 This module handles **card operations** in the Intuit Payment SDK, allowing you to:
 
-✅ **Create a new card** for a customer.  
-✅ **Get Details of the card** for a customer
-✅ **Get list of the cards** for a customer
-✅ **Delete a card** for a customer
+- ✅ **Create a new card** for a customer.  
+- ✅ **Get Details of the card** for a customer
+- ✅ **Get list of the cards** for a customer
+- ✅ **Delete a card** for a customer
 
 ---
 

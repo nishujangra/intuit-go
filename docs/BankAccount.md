@@ -2,6 +2,11 @@
 
 This document provides details on how to create a **Bank Account** using the Intuit API in our SDK.
 
+- ✅ **Create a Bank Account** for a customer.
+- ✅ **Get Details of Bank Account** of a Customer by Bank Account ID
+- ✅ **Get List of Bank Accounts** of a Customer
+- ✅ **Delete a Bank Account** by Bank Account ID
+
 ---
 
 ## 🌐 API Endpoint

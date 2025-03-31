@@ -1,9 +1,13 @@
 # Charge API - Intuit Payment SDK
 
-This module handles **card operations** in the Intuit Payment SDK, allowing you to:
+This module handles **Charges** in the Intuit Payment SDK, allowing you to:
 
-✅ **Create a new Charge** for a customer.  
-✅ **Use the Charge for transactions.**
+- ✅ **Create a new Charge** for a customer.  
+- ✅ **Refund a Charge**
+- ✅ **Get Details About Charge**
+- ✅ **Get Details About Refund**
+- ✅ **Capture a Charge**
+- ✅ **Void a Charge**
 
 ---
 
@@ -306,7 +310,7 @@ resp, err := apiClient.CaptureCharge(chargeID, capture)
 
 ### **6. Void a Charge**
 
-**POST**
+**POST** `quickbooks/v4/payments/txn-requests/{charge-request-id}/void`
 
 `Note:` You would require `request-id` of the charge you want to avoid. I would recommed you to store the `request-id` to your database to reuse them.
 

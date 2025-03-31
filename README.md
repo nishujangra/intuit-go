@@ -78,6 +78,7 @@ Check the [examples](examples/) for how to use this SDK.
 - [Bank Account](docs/BankAccount.md)
 - [Crate Card](docs/Card.md)
 - [Charges, Refund](docs/Charge.md)
+- [E-Checks](docs/ECheck.md)
 
 ---
 

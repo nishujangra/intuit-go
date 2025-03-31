@@ -34,7 +34,7 @@ func NewClient(accessToken string) *Client {
 		HTTPClient: &http.Client{
 			Timeout: 10 * time.Second,
 		},
-		Logger: log.New(logFile, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile),
+		Logger: log.New(logFile, "INFO: ", log.Ldate|log.Ltime),
 	}
 }
 
