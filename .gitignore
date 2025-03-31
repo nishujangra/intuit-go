@@ -24,6 +24,8 @@ go.work.sum
 # main file
 main.go
 
-
 # configuration files
 config.json
+
+# log files 
+*.log
